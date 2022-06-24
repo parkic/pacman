@@ -2,6 +2,7 @@ const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
 const scoreEl = document.querySelector('#scoreEl')
+const resultEl = document.querySelector('#result')
 
 // same as window.innerWidth
 canvas.width = innerWidth
@@ -191,7 +192,7 @@ let score = 0
 
 const map = [
   ['1', '-', '-', '-', '-', '-', '-', '-', '-', '-', '2'],
-  ['|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'],
+  ['|', ' ', '.', '.', '.', '.', '.', '.', '.', '.', '|'],
   ['|', '.', 'b', '.', '[', '7', ']', '.', 'b', '.', '|'],
   ['|', '.', '.', '.', '.', '_', '.', '.', '.', '.', '|'],
   ['|', '.', '[', ']', '.', '.', '.', '[', ']', '.', '|'],
@@ -523,15 +524,17 @@ function animate() {
       if(ghost.scared){
         ghosts.splice(i, 1)
       } else {
+        resultEl.style.color = 'red'
+        resultEl.innerHTML = 'You lose'
         cancelAnimationFrame(animationId)
-        console.log('you lose');
       }
     }
   }
 
   // win condition
   if(pellets.length === 0 ) {
-    console.log('you win')
+    resultEl.style.color = 'green'
+    resultEl.innerHTML = 'You win'
     cancelAnimationFrame(animationId)
   }
 
